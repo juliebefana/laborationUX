@@ -7,11 +7,12 @@ const registrationForm = document.querySelector('.registration-form');
 // Read More / Show Less 
 // ==========================================
 readMoreBtn.addEventListener('click', function() {
-  if (moreInfoContent.style.display === 'none') {
-    moreInfoContent.style.display = 'block';
-    readMoreBtn.textContent = 'Show Less';
-  } else {
+  if (moreInfoContent.style.display === 'block') {
     moreInfoContent.style.display = 'none';
+    readMoreBtn.textContent = 'Read more';
+  } else {
+    moreInfoContent.style.display = 'block';
+    readMoreBtn.textContent = 'Show less';      
   }
 });
 
@@ -43,14 +44,14 @@ registrationForm.addEventListener('submit', function(event) {
   event.preventDefault(); // Stoppar formuläret från att skickas direkt
   clearErrors();
 
-  const nameInput = document.getElementById('fullName');
+  const nameInput = document.getElementById('nameInput');
   const emailInput = document.getElementById('emailAddr');
   let isValid = true;
 
   // -------------------------------------------------------------
   // E-postvalidering
   // -------------------------------------------------------------
-  if (!emailInput.value.trim() !== '') { 
+  if (emailInput.value.trim() === '') { 
     showError(emailInput, 'Vänligen ange en giltig e-postadress.');
     isValid = false;
   }
@@ -58,7 +59,7 @@ registrationForm.addEventListener('submit', function(event) {
   // -------------------------------------------------------------
   // Namnvalidering
   // -------------------------------------------------------------
-  if (emailInput.value.trim() === '') { 
+  if (nameInput.value.trim() === '') { 
     showError(nameInput, 'Namn får inte vara tomt.');
     isValid = false;
   }
